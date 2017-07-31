@@ -12,4 +12,20 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.form-group.required .control-label:after {
+    content: " *";
+    color: red;
+}
+
+.table td.fit,
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+
+a:visited {color: #337ab7;}
