@@ -17,12 +17,13 @@ body
         li
           = link_to Post.model_name.human(count: 2), posts_path
       ul.nav.navbar-nav.pull-right
-        li
-          span.navbar-text
-            => t('messages.current_user')
-            = current_user.name
-        li
-          = link_to t('messages.logout'), logout_path, method: :delete, class: 'navbar-link'
+        - if user_signed_in?
+          li
+            span.navbar-text
+              => t('messages.current_user')
+              = current_user.name
+          li
+            = link_to t('messages.logout'), logout_path, method: :delete, class: 'navbar-link'
 
   .container-fluid
     .row
