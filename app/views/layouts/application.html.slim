@@ -1,0 +1,36 @@
+doctype html
+
+head
+  title Mob
+  = csrf_meta_tags
+
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => reload
+  = javascript_include_tag 'application', 'data-turbolinks-track' => reload
+body
+
+  nav.navbar.navbar-inverse
+    .navbar-header
+      a.navbar-brand
+        | Mob
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li
+          = link_to Post.model_name.human(count: 2), posts_path
+      ul.nav.navbar-nav.pull-right
+        li
+          span.navbar-text
+            => t('messages.current_user')
+            = current_user.name
+        li
+          = link_to t('messages.logout'), logout_path, method: :delete, class: 'navbar-link'
+
+  .container-fluid
+    .row
+      .col-lg-offset-1.col-lg-10
+        p.notice.text-info
+          = notice
+        p.alert.text-danger
+          = alert
+    .row
+      .col-lg-offset-1.col-lg-10
+        = yield
