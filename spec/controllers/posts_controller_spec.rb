@@ -7,7 +7,7 @@ RSpec.describe PostsController, type: :controller do
     it 'then he redirect to login page' do
       get :index
 
-      expect(response).to redirect_to(sign_in)
+      expect(response).to redirect_to(new_user_session_url)
     end
   end
 
