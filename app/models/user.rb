@@ -3,5 +3,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable, :timeoutable #, :omniauthable
 
-  #validates :name, length: {min: 3, max: 300}
+  validates :name, length: {in: 3..300}
 end

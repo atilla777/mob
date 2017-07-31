@@ -53,5 +53,21 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Mailer config from devise instruction
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :letter_opener
+#  config.action_mailer.raise_delivery_errors = false
+#  config.action_mailer.default :charset => "utf-8"
+#
+#  config.action_mailer.smtp_settings = {
+#    address: "smtp.mail.ru",
+#    port: 465,
+#    domain: "inbox.ru",
+#    authentication: "plain",
+#    enable_starttls_auto: true,
+#    openssl_verify_mode: 'none',
+#    tls: true,
+#    user_name: ENV["MAIL_USERNAME"],
+#    password: ENV["MAIL_PASSWORD"]
+#  }
 end
