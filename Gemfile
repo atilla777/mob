@@ -15,6 +15,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -48,6 +49,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  # Open sended email in browser
+  gem "letter_opener"
   # Chrome rails panel plugin
   gem 'meta_request'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
