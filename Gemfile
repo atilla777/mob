@@ -68,6 +68,7 @@ end
 gem 'slim-rails'
 gem 'bootstrap-sass'
 gem 'kaminari'
+gem 'dotenv-rails'
 #gem 'font-awesome-rails'
 #gem 'authlogic'
 #gem 'pundit'
