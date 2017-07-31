@@ -9,29 +9,34 @@ head
 body
 
   nav.navbar.navbar-inverse
-    .navbar-header
-      a.navbar-brand
-        | Mob
-    .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li
-          = link_to Post.model_name.human(count: 2), posts_path
-      ul.nav.navbar-nav.pull-right
-        - if user_signed_in?
+    .container-fluid
+      .navbar-header
+        a.navbar-brand
+          | Mob
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
           li
-            span.navbar-text
-              => t('messages.current_user')
+            = link_to Post.model_name.human(count: 2), posts_path
+        ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            li
+              => 'You are loggined as:'
               = current_user.name
-          li
-            = link_to t('messages.logout'), logout_path, method: :delete, class: 'navbar-link'
+            li
+              = link_to 'Logout', destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to new_user_session_path do
+                span.glyphicon.glyphicon-log-in
+                =< 'Sign in'
 
-  .container-fluid
+  .container
     .row
-      .col-lg-offset-1.col-lg-10
+      .col-sm-8
         p.notice.text-info
           = notice
         p.alert.text-danger
           = alert
     .row
-      .col-lg-offset-1.col-lg-10
+      .col-sm-8
         = yield
