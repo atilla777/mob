@@ -1,1 +1,10 @@
 h2 Posts
+ul
+- @posts.each do | post |
+  li
+    p
+      = post.show_created_at
+      = post.user_name
+      = post.name
+    p
+      = post.body

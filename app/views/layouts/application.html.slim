@@ -33,12 +33,16 @@ body
                 =< 'Sign in'
 
   .container
-    .row
-      .col-sm-8
-        p.notice.text-info
-          = notice
-        p.alert.text-danger
-          = alert
+    - if notice.present?
+      .row
+        .col-sm-8
+          p.notice.text-info
+            = notice
+    - if alert.present?
+      .row
+        .col-sm-8
+          p.alert.text-danger
+            = alert
     .row
       .col-sm-8
         = yield
