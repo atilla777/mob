@@ -41,8 +41,8 @@ feature 'posts management' do
     login_as(writer, scope: :user)
     visit '/'
     click_on "#{I18n.t('helpers.submit.create', model: Post.model_name.human)}"
-    fill_in 'Name', with: 'Post'
-    fill_in 'Body', with: 'Users post!'
+    fill_in Post.human_attribute_name(:name), with: 'Post'
+    fill_in Post.human_attribute_name(:body), with: 'Users post!'
     click_button I18n.t('helpers.submit.save')
 
     expect(page).to have_content 'Users post!'

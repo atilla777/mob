@@ -20,17 +20,18 @@ body
         ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             li
-              => 'You are loggined as:'
-              = current_user.name
+              span.navbar-text
+                = t('views.message.loggined_as')
+                =< current_user.name
             li
               = link_to destroy_user_session_path, method: :delete do
                 span.glyphicon.glyphicon-log-out
-                =< 'Logout'
+                =< t('helpers.link_to.logout')
           - else
             li
               = link_to new_user_session_path do
                 span.glyphicon.glyphicon-log-in
-                =< 'Sign in'
+                =< t('helpers.link_to.login')
 
   .container
     - if notice.present?

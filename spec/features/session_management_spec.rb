@@ -19,17 +19,16 @@ feature 'session management' do
 
   scenario 'new user make registration' do
     visit '/'
-    click_link 'Sign in'
-    click_link 'Sign up'
+    click_link I18n.t('helpers.link_to.login')
+    click_link I18n.t('helpers.link_to.signup')
     fill_in 'Name', with: 'Aleksey'
     fill_in 'Email', with: 'aleksey@localhost'
     fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
-    click_button 'Sign up'
+    click_button I18n.t('helpers.link_to.login')
 
-    #expect(page).to have_text I18n.t('devise.confirmations.send_instructions')
     expect(page).to have_text I18n.t('devise.registrations.user.signed_up_but_unconfirmed')
-    expect(page).to have_link('Sign in')
+    expect(page).to have_link I18n.t('helpers.link_to.login')
   end
 
   scenario 'new but not confirmed user try enter to application' do

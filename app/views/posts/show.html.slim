@@ -11,4 +11,4 @@ p
 .col-sm-offset-2.col-sm-10
   = link_to posts_path do
     span.btn.btn-info
-      = t('helpers.link_to.back', model: Post.model_name.human, count: 2)
+      = t('helpers.link_to.back', model: Post.model_name.human(count: 2))

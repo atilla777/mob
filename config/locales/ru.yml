@@ -7,14 +7,15 @@ ru:
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
-    #models:
-    # cow:
-    #   one: "Корова"
-    #   other: "Коровы"
-    #attributes:
-    # cow:
-    #    name: "Имя"
-    #    description: "Описание"
+    models:
+     post:
+       one: "Пост"
+       other: "Посты"
+    attributes:
+     post:
+        name: "Название"
+        user: "Пользователь"
+        body: "Содержание"
   flashes:
     create: Запись %{model} успешно создана.
     update: Запись %{model} успешно отредактирована.
@@ -33,6 +34,9 @@ ru:
       edit: "Редактировать"
       delete: "Удалить"
       back: "Назад"
+      enter: "Вход"
+    message:
+      loggined_as: "Вы вошли как:"
   date:
     abbr_day_names:
     - Вс
@@ -206,6 +210,9 @@ ru:
     link_to:
       back: Вернуться к %{model}
       new: Новый %{model}
+      login: Войти
+      logout: Выйти
+      signup: Зарегистрироваться
     select:
       prompt: 'Выберите: '
     submit:
