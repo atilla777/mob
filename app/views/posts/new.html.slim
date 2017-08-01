@@ -1,6 +1,6 @@
 h2 = t('helpers.link_to.new', model: Post.model_name.human)
 
-== render 'form', locals: {post: @post}
+== render partial: 'form', post: @post
 
 .col-sm-offset-2.col-sm-10
   = link_to posts_path do

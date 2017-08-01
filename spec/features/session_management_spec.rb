@@ -13,11 +13,13 @@ feature 'session management' do
   scenario 'anonymouse user try access to page' do
     visit '/'
 
-    expect(page).to have_button('Sign in')
+    expect(page).to have_link('Sign in')
+    expect(page).to have_content(Post.model_name.human count: 2)
   end
 
   scenario 'new user make registration' do
     visit '/'
+    click_link 'Sign in'
     click_link 'Sign up'
     fill_in 'Name', with: 'Aleksey'
     fill_in 'Email', with: 'aleksey@localhost'
@@ -25,7 +27,9 @@ feature 'session management' do
     fill_in 'Password confirmation', with: '123456'
     click_button 'Sign up'
 
-    expect(page).to have_button('Sign in')
+    #expect(page).to have_text I18n.t('devise.confirmations.send_instructions')
+    expect(page).to have_text I18n.t('devise.registrations.user.signed_up_but_unconfirmed')
+    expect(page).to have_link('Sign in')
   end
 
   scenario 'new but not confirmed user try enter to application' do
@@ -64,7 +68,7 @@ feature 'session management' do
     fill_in 'Password', with: '123456'
     click_button 'Sign in'
 
-    expect(page).to have_text 'Invalid Email'
+    expect(page).to have_text I18n.t('devise.failure.not_found_in_database')
     expect(page).to have_button 'Sign in'
   end
 end

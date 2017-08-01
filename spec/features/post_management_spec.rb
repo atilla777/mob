@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 feature 'posts management' do
+  before(:context) { create_list(:post, 10) }
+  given(:post) { Post.first }
+  given(:posts) { Post.all}
   given(:user) { create(:user) }
-  given(:writer) { create(:user, writer: true) }
-  given(:posts) { create_list(:post, 10) }
+  given(:writer) { create(:user, :writer) }
 
   scenario 'user can view posts' do
     login_as(user, scope: :user)
@@ -22,22 +24,22 @@ feature 'posts management' do
 
   scenario 'user can view post' do
     login_as(user, scope: :user)
-    post = Post.where(name: "#{posts.first.name}").first
     visit "/posts/#{post.id}"
 
     expect(page).to have_content(post.body)
+    expect(page).to_not have_content(posts.last.body)
   end
 
   scenario 'anonymouse can view post' do
-    post = Post.where(name: "#{posts.first.name}").first
     visit "/posts/#{post.id}"
 
     expect(page).to have_content(post.body)
+    expect(page).to_not have_content(posts.last.body)
   end
 
   scenario 'writer can create post' do
-    login_as(writer, scope: user)
-    visit '/posts'
+    login_as(writer, scope: :user)
+    visit '/'
     click_on "#{I18n.t('helpers.submit.create', model: Post.model_name.human)}"
     fill_in 'Name', with: 'Post'
     fill_in 'Body', with: 'Users post!'
