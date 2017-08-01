@@ -5,9 +5,9 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  delegate :anme, to: :user
+  delegate :name, to: :user, prefix: true
 
   def show_created_at
-    strftime(create_at, "%d.%m.%Y")
+    created_at.strftime("%d.%m.%Y")
   end
 end

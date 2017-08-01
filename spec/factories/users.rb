@@ -1,8 +1,11 @@
 FactoryGirl.define do
   factory :user do
-    name "Vasia Pugovkin"
-    email "vasia.p@gmail.com"
+    sequence(:name) { |n| "User#{n}" }
+    sequence(:email) { |n| "user#{n}@gmail.com" }
     admin false
+    writer false
+    trait(:admin) {admin true}
+    trait(:writer) {writer true}
     password "123456"
     description "I like icecream!"
     transient { confirmed true}

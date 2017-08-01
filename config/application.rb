@@ -14,5 +14,11 @@ module Mob
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+        "<div class='text-danger has-error' >#{html_tag}</div>".html_safe
+      }
+      config.i18n.default_locale = :ru
+      config.time_zone = 'Moscow'
   end
 end
