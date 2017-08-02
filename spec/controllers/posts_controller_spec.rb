@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let(:user) { create(:user)}
   let(:writer) { create(:user, writer: true)}
-  let(:posts) { create_list(:post, 10) }
-  let(:writer_posts) { create_list(:post, 10, user_id: writer.id) }
+  let(:user) { create(:user)}
+  before(:each) { create_list(:post, 5, user_id: writer.id) }
+  let(:posts) { Post.where(user_id: writer.id) }
   let(:create_post) { post :create, params: { post: attributes_for(:post, user_id: user.id) } }
-  let(:update_post) { put :update, params: { id: writer_posts.first.id, post: { name: 'Post updated!'}} }
+  let(:update_post) { put :update, params: { id: posts.first.id, post: { name: 'Post updated!'}} }
+  let(:delete_post) { delete :destroy, params: {id: posts.first.id } }
 
   context 'anonymouse user' do
     it 'can view posts' do
@@ -36,6 +37,11 @@ RSpec.describe PostsController, type: :controller do
       post = posts.first
       get :edit, params: {id: post.id}
 
+      expect(response).to redirect_to(new_user_session_url)
+    end
+
+    it 'can`t delete post' do
+      expect { delete_post }.to_not change { Post.count }
       expect(response).to redirect_to(new_user_session_url)
     end
 
@@ -86,7 +92,7 @@ RSpec.describe PostsController, type: :controller do
 
     it 'can start edit post' do
       sign_in writer
-      post = writer_posts.first
+      post = posts.first
       get :edit, params: {id: post.id}
 
       expect(response).to render_template(:edit)
@@ -96,7 +102,14 @@ RSpec.describe PostsController, type: :controller do
       sign_in writer
       update_post
 
-      expect(response).to redirect_to post_path(id: writer_posts.first.id)
+      expect(response).to redirect_to post_path(id: posts.first.id)
+    end
+
+    it 'can delete post' do
+      sign_in writer
+
+      expect { delete_post }.to change { Post.count }
+      expect(response).to redirect_to posts_path
     end
   end
 end

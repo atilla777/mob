@@ -41,6 +41,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = set_post
+    authorize! :destroy, Post, @post
+    @post.destroy
+    redirect_to posts_path, notice: 'Post was destroyed'
+  end
+
   private
 
   def set_post

@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 feature 'posts management' do
-  before(:context) { create_list(:post, 10) }
+  given(:writer) { create(:user, :writer) }
+  given(:user) { create(:user) }
+  before(:each) { create_list(:post, 5, user_id: writer.id) }
   given(:post) { Post.first }
   given(:posts) { Post.all}
-  given(:user) { create(:user) }
-  given(:writer) { create(:user, :writer) }
+  given(:writer_posts) { Post.where(user_id: writer.id) }
+  given(:writer_post) { Post.where(user_id: writer.id).first }
 
   feature 'by user' do
     scenario 'he view posts' do
@@ -34,6 +36,13 @@ feature 'posts management' do
 
       expect(page).to_not have_selector(:link_or_button, I18n.t('helpers.submit.save'))
     end
+
+    scenario 'he can`t delete post' do
+      login_as(user, scope: :user)
+      page.driver.submit :delete, "/posts/#{post.id}", {}
+
+      expect(page).to have_content(posts.last.body)
+    end
   end
 
   feature 'by writer' do
@@ -56,6 +65,17 @@ feature 'posts management' do
       click_button I18n.t('helpers.submit.save')
 
       expect(page).to have_content('I edited post!')
+    end
+
+    scenario 'he delete post', js: true do
+      login_as(writer, scope: :user)
+      body = writer_post.body
+      visit "/posts/"
+      find("a[href='/posts/#{writer_post.id}']").click
+      click_on I18n.t('views.action.delete')
+      page.accept_confirm
+
+      expect(page).to_not have_content(body)
     end
   end
 

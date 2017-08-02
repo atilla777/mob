@@ -4,7 +4,7 @@ h2.text-info
     .pull-right
       = link_to new_post_path
         span.btn.btn-link
-          i.glyphicon.glyphicon-pencil
+          i.glyphicon.glyphicon-plus
           =< t('helpers.submit.create', model: Post.model_name.human)
 - @posts.each do | post |
   h3.text-primary
