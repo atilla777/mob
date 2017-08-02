@@ -12,7 +12,7 @@ RSpec.describe PostsController, type: :controller do
       expect(assigns(:posts)).to  match_array posts
     end
 
-    it 'can`t start cerate post' do
+    it 'can`t start create post' do
       get :new
 
       expect(response).to redirect_to(new_user_session_url)

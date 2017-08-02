@@ -1,14 +1,17 @@
-h2
+h2.text-info
   = Post.model_name.human
 
-p
-  => @post.show_created_at
-  => @post.user_name
+h3.text-primary
   = @post.name
+h5
+  span.glyphicon.glyphicon-time
+  =< @post.show_created_at
+  ' ,
+  => @post.user_name
 p
-  = @post.body
+  = simple_format (truncate @post.body, length: 200)
+p
 
-.col-sm-offset-2.col-sm-10
-  = link_to posts_path do
-    span.btn.btn-info
-      = t('helpers.link_to.back', model: Post.model_name.human(count: 2))
+= link_to posts_path do
+  span.btn.btn-info
+    = t('helpers.link_to.back', model: Post.model_name.human(count: 2))

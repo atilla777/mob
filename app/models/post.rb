@@ -8,6 +8,6 @@ class Post < ApplicationRecord
   delegate :name, to: :user, prefix: true
 
   def show_created_at
-    created_at.strftime("%d.%m.%Y")
+    created_at.strftime("%d.%m.%Y %H:%M")
   end
 end

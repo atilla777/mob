@@ -1,8 +1,3 @@
-h2 = t('helpers.link_to.new', model: Post.model_name.human)
+h2.col-sm-offset-2.col-sm-10.text-info = t('helpers.link_to.new', model: Post.model_name.human)
 
 == render partial: 'form', locals: {post: @post}
-
-.col-sm-offset-2.col-sm-10
-  = link_to posts_path do
-    span.btn.btn-info
-      = t('helpers.link_to.back', model: Post.model_name.human(count: 2))

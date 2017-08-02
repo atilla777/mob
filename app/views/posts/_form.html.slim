@@ -10,15 +10,18 @@
   = f.hidden_field :user_id, value: current_user.id
   .form-group.required
     .field
-      = f.label :name, "#{Post.human_attribute_name :name}", class: 'col-sm-2 control-label'
+      = f.label :name, Post.human_attribute_name(:name), class: 'col-sm-2 control-label'
       .col-sm-10
         = f.text_field :name, class: 'form-control'
   .form-group.required
     .field
-      = f.label :body, "#{Post.human_attribute_name :body}", class: 'col-sm-2 control-label'
+      = f.label :body, Post.human_attribute_name(:body), class: 'col-sm-2 control-label'
       .col-sm-10
         = f.text_area :body, class: 'form-control', rows: 20
 
   .actions.form-group
     .col-sm-offset-2.col-sm-10
       => f.submit t('helpers.submit.save'), class: 'btn btn-success'
+      = link_to posts_path do
+        span.btn.btn-info
+          = t('helpers.link_to.back', model: Post.model_name.human(count: 2))

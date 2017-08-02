@@ -1,7 +1,13 @@
-h2
-  | Sign up
+h2.col-sm-offset-2.col-sm-10.text-info
+  = t('views.action.registration')
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form-horizontal'}) do |f|
-  = devise_error_messages!
+  - if !resource.errors.empty?
+      .col-sm-offset-2.col-sm-10
+        span.text-danger
+          h4 = t('errors.template.header', count: resource.errors.count, model: User.model_name.human)
+          ul
+            - resource.errors.full_messages.each do |message|
+              li = message
   .form-group.required
     .field
       = f.label :name, class: 'col-sm-2 control-label'
@@ -34,4 +40,4 @@ h2
          = f.text_area :description, rows: 4, class: 'form-control'
   .col-sm-offset-2.col-sm-6
     .actions.form-group
-      = f.submit "Sign up", class: 'btn btn-success'
+      = f.submit t('helpers.link_to.signup'), class: 'btn btn-success'

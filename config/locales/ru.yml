@@ -8,14 +8,23 @@ ru:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
           has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
     models:
-     post:
-       one: "Пост"
-       other: "Посты"
+      user:
+        one: Пользователь
+        other: Пользователи
+      post:
+        one: "Пост"
+        other: "Посты"
     attributes:
-     post:
-        name: "Название"
-        user: "Пользователь"
-        body: "Содержание"
+      user:
+        name: Имя
+        email: Email
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        description: О себе
+      post:
+         name: "Название"
+         user: "Пользователь"
+         body: "Содержание"
   flashes:
     create: Запись %{model} успешно создана.
     update: Запись %{model} успешно отредактирована.
@@ -35,6 +44,7 @@ ru:
       delete: "Удалить"
       back: "Назад"
       enter: "Вход"
+      registration: Регистрация
     message:
       loggined_as: "Вы вошли как:"
   date:
@@ -206,13 +216,21 @@ ru:
         many: "%{model}: сохранение не удалось из-за %{count} ошибок"
         one: "%{model}: сохранение не удалось из-за %{count} ошибки"
         other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+  labels:
+    email: Электронная почта
+    password: Пароль
+    remember_me: Запомнить меня
   helpers:
     link_to:
       back: Вернуться к %{model}
       new: Новый %{model}
       login: Войти
+      login_with: Войти с помощью
       logout: Выйти
       signup: Зарегистрироваться
+      forgot_password: "Забыли свой пароль?"
+      did_not_recive_confirmation_instruction: "Не получили инструкцию по подтверждению?"
+      did_not_receive_unlock_instruction: "Не получили инструкцию по разблокировке?"
     select:
       prompt: 'Выберите: '
     submit:

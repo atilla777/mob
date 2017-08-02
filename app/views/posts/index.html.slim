@@ -1,18 +1,18 @@
-.row
-  h2
-    = Post.model_name.human count: 2
-    - if user_signed_in? && current_user.writer?
-      .pull-right
-        = link_to new_post_path
-          span.btn.btn-success
-            = t('helpers.submit.create', model: Post.model_name.human)
-.row
-  ul
-  - @posts.each do | post |
-    li
-      p
-        => post.show_created_at
-        => post.user_name
-        = post.name
-      p
-        = post.body
+h2.text-info
+  = Post.model_name.human count: 2
+  - if user_signed_in? && current_user.writer?
+    .pull-right
+      = link_to new_post_path
+        span.btn.btn-success
+          = t('helpers.submit.create', model: Post.model_name.human)
+- @posts.each do | post |
+  h3.text-primary
+    = post.name
+  h5
+    span.glyphicon.glyphicon-time
+    =< post.show_created_at
+    ' ,
+    => post.user_name
+  p
+    = simple_format (truncate post.body, length: 200)
+  hr
