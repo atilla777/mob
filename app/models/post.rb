@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  paginates_per 5
+
   validates :name, presence: true
   validates :body, presence: true
   validates :user_id, presence: true
