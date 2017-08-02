@@ -2,14 +2,17 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    authorize! :index, Post
     @posts = Post.all
   end
 
   def new
+    authorize! :new, Post
     @post = Post.new
   end
 
   def create
+    authorize! :create, Post
     @post = Post.new(post_params)
     if @post.save
       redirect_to @post, nitice: 'Post was created'
@@ -20,14 +23,17 @@ class PostsController < ApplicationController
 
   def show
     @post = set_post
+    authorize! :show, Post, @post
   end
 
   def edit
     @post = set_post
+    authorize! :edit, Post, @post
   end
 
   def update
     @post = set_post
+    authorize! :update, Post, @post
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was updated'
     else
