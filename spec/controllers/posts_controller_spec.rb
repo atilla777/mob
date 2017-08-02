@@ -4,6 +4,7 @@ RSpec.describe PostsController, type: :controller do
   let(:user) { create(:user)}
   let(:posts) { create_list(:post, 10) }
   let(:create_post) { post :create, params: { post: attributes_for(:post, user_id: user.id) } }
+  let(:update_post) { put :update, params: { id: posts.first.id, post: { name: 'Post updated!'}} }
 
   context 'anonymouse user' do
     it 'can view posts' do
@@ -19,9 +20,20 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it 'can`t create post' do
-      #post :create, params: {post: attributes_for(:post) }
-
       expect { create_post }.to_not change { Post.count }
+      expect(response).to redirect_to(new_user_session_url)
+
+    end
+    it 'can`t start create post' do
+      get :new
+
+      expect(response).to redirect_to(new_user_session_url)
+    end
+
+    it 'can`t start update post' do
+      post = posts.first
+      get :edit, params: {id: post.id}
+
       expect(response).to redirect_to(new_user_session_url)
     end
 
@@ -67,6 +79,20 @@ RSpec.describe PostsController, type: :controller do
       expect { create_post }.to change { Post.count }
       expect(response).to have_http_status(:redirect)
     end
-  end
 
+    it 'can start edit post' do
+      sign_in user
+      post = posts.first
+      get :edit, params: {id: post.id}
+
+      expect(response).to render_template(:edit)
+    end
+
+    it 'can update post' do
+      sign_in user
+      update_post
+
+      expect(response).to redirect_to post_path(id: posts.first.id)
+    end
+  end
 end

@@ -22,6 +22,19 @@ class PostsController < ApplicationController
     @post = set_post
   end
 
+  def edit
+    @post = set_post
+  end
+
+  def update
+    @post = set_post
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was updated'
+    else
+      render :edit, alert: 'Post was not updated'
+    end
+  end
+
   private
 
   def set_post

@@ -16,7 +16,7 @@ admin.confirm
 
 Post.create(user_id: admin.id,
            name: 'Welcome to mob!',
-           body: <<-TEXT
+           body: <<~TEXT
                   Welocome to Mob - My own blog!
                   First - change password for Admin user!
                   default login - admin@host.io

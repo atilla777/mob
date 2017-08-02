@@ -3,11 +3,12 @@ h2.text-info
   - if user_signed_in? && current_user.writer?
     .pull-right
       = link_to new_post_path
-        span.btn.btn-success
-          = t('helpers.submit.create', model: Post.model_name.human)
+        span.btn.btn-link
+          i.glyphicon.glyphicon-pencil
+          =< t('helpers.submit.create', model: Post.model_name.human)
 - @posts.each do | post |
   h3.text-primary
-    = post.name
+    = link_to post.name, post
   h5
     span.glyphicon.glyphicon-time
     =< post.show_created_at
@@ -15,4 +16,11 @@ h2.text-info
     => post.user_name
   p
     = simple_format (truncate post.body, length: 200)
+  h5
+  - if user_signed_in? && current_user.writer?
+    .pull-right
+      =< link_to edit_post_path(post) do
+        span.glyphicon.glyphicon-pencil
+        =< t('views.action.edit')
+    br
   hr
