@@ -1,0 +1,9 @@
+- @comments.each do |comment|
+  h5.text-primary
+    span.glyphicon.glyphicon-time
+    =< comment.show_created_at
+    ' ,
+    = comment.user_name
+  p
+    = comment.body
+  hr

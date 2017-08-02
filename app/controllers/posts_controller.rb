@@ -24,6 +24,8 @@ class PostsController < ApplicationController
   def show
     @post = set_post
     authorize! :show, Post, @post
+    @comments = @post.comments
+    @comment = Comment.new
   end
 
   def edit

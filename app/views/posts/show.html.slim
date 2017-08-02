@@ -10,14 +10,27 @@ h5
   => @post.user_name
 p
   = simple_format (truncate @post.body, length: 200)
-p
-
 = link_to posts_path do
   span.btn.btn-info
     = t('helpers.link_to.back', model: Post.model_name.human(count: 2))
-=< link_to edit_post_path(@post) do
-  span.btn.btn-warning
-    = t('views.action.edit', model: Post.model_name.human(count: 2))
-=< link_to post_path(@post), data: { confirm: t('views.action.confirm') }, method: :delete do
-  span.btn.btn-danger
-    = t('views.action.delete', model: Post.model_name.human(count: 2))
+- if user_signed_in? && current_user.writer?
+  =< link_to edit_post_path(@post) do
+    span.btn.btn-warning
+      = t('views.action.edit', model: Post.model_name.human(count: 2))
+  =< link_to post_path(@post), data: { confirm: t('views.action.confirm') }, method: :delete do
+    span.btn.btn-danger
+      = t('views.action.delete', model: Post.model_name.human(count: 2))
+
+- if user_signed_in?
+  hr
+  #comments
+    == render partial: 'comments/comments'
+
+  #new_comment
+    = form_for [@post, @comment], remote: true do | f |
+      .form-group
+        = f.label :body, Comment.model_name.human, class: 'control-label'
+        br
+        = f.text_area :body, rows: 6, class: 'form-control'
+        br
+        = f.submit t('helpers.submit.save'), class: 'btn btn-success'

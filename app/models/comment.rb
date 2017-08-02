@@ -1,12 +1,10 @@
-class Post < ApplicationRecord
-  paginates_per 5
-
-  validates :name, presence: true
+class Comment < ApplicationRecord
+  validates :post_id, numericality: {only_integer: true}
+  validates :user_id, numericality: { only_integer: true }
   validates :body, presence: true
-  validates :user_id, presence: true
 
+  belongs_to :post
   belongs_to :user
-  has_many :comments
 
   delegate :name, to: :user, prefix: true
 
