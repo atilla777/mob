@@ -31,6 +31,16 @@ feature 'comment management' do
 
       expect(page).to have_content('Edited by user!')
     end
+
+    scenario 'he can delete comment', js: true do
+      login_as user
+      user_comment
+      visit "/posts/#{user_post.id}"
+      find("a[href=\"#{post_comment_path(post_id: user_post.id, id: user_comment.id)}\"]").click
+      page.accept_confirm
+
+      expect(page).to_not have_link(:css, "a[data-comment-id=\"#{user_comment.id}\"]")
+    end
   end
 
   feature 'by anonumouse', js: true do
@@ -40,11 +50,18 @@ feature 'comment management' do
       expect(page).to_not have_css('div#add_comment')
     end
 
-    scenario 'he can`t start edit comment' do
+    scenario 'he can`t start edit comment', js: true do
       user_comment
       visit "/posts/#{user_post.id}"
 
       expect(page).to_not have_css("a[data-comment-id=\"#{user_comment.id}\"]")
+    end
+
+    scenario 'he can`t delete comment', js: true do
+      user_comment
+      visit "/posts/#{user_post.id}"
+
+      expect(page).to_not have_link(:css, "a[href=\"#{post_comment_path(post_id: user_post.id, id: user_comment.id)}\"]")
     end
   end
 end

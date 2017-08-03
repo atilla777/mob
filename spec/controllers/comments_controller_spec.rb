@@ -20,6 +20,11 @@ RSpec.describe CommentsController, type: :controller do
                              id: user_comment.id,
                              format: :js }
   end
+  let(:delete_comment) do
+    delete :destroy, params: { post_id: user_post.id,
+                               id: user_comment.id,
+                               format: :js }
+  end
 
   context 'registered user ' do
     it 'can create comment' do
@@ -35,6 +40,13 @@ RSpec.describe CommentsController, type: :controller do
 
       expect(response).to render_template(:update)
     end
+
+    it 'can delete comment' do
+      sign_in user
+      create_comment
+      expect { delete_comment }.to change { Comment.count }
+      expect(response).to have_http_status(:success)
+    end
   end
 
   context 'anonymouse' do
@@ -48,5 +60,13 @@ RSpec.describe CommentsController, type: :controller do
 
       expect(response).to have_http_status(401)
     end
+    it 'can`t delete comment' do
+      comment
+      delete_comment
+
+      expect { delete_comment }.to_not change { Comment.count }
+      expect(response).to have_http_status(401)
+    end
   end
+
 end

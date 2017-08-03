@@ -11,6 +11,7 @@ br
     = comment.body
   - if user_signed_in?
     = link_to t('views.action.edit'), '', class: 'edit_comment_link', data: { comment_id: comment.id }
+    =< link_to t('views.action.delete'), post_comment_path(id: comment.id, post_id: @post.id), method: :delete, remote: :true, data: {confirm: t('views.action.confirm')}
     div class = 'text-danger' id = "edit_comment_#{comment.id}_errors"
     = form_for [@post, comment], remote: true do | f |
       .form-group
