@@ -21,12 +21,13 @@ p
     span.btn.btn-danger
       = t('views.action.delete', model: Post.model_name.human(count: 2))
 
-- if user_signed_in?
-  hr
-  #comments
-    == render partial: 'comments/comments'
+hr
+#comments
+  == render partial: 'comments/comments'
 
-  #new_comment
+- if user_signed_in?
+  #add_comment
+    .text-danger#new_comment_errors
     = form_for [@post, @comment], remote: true do | f |
       .form-group
         = f.label :body, Comment.model_name.human, class: 'control-label'

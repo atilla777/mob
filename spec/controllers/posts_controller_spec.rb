@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  let(:writer) { create(:user, writer: true)}
-  let(:user) { create(:user)}
+  let(:writer) { create(:user, writer: true) }
+  let(:user) { create(:user) }
   before(:each) { create_list(:post, 5, user_id: writer.id) }
   let(:posts) { Post.where(user_id: writer.id) }
   let(:create_post) { post :create, params: { post: attributes_for(:post, user_id: user.id) } }

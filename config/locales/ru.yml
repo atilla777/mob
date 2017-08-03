@@ -12,8 +12,11 @@ ru:
         one: Пользователь
         other: Пользователи
       post:
-        one: "Пост"
-        other: "Посты"
+        one: Пост
+        other: Посты
+      comment:
+        one: Комментарий
+        other: Комментарии
     attributes:
       user:
         name: Имя
@@ -22,9 +25,13 @@ ru:
         password_confirmation: Подтверждение пароля
         description: О себе
       post:
-         name: "Название"
-         user: "Пользователь"
-         body: "Содержание"
+         name: Название
+         user: Пользователь
+         body: Содержание
+      comment:
+        body: Комментарий
+        user: Пользователь
+        post: Пост
   flashes:
     create: Запись %{model} успешно создана.
     update: Запись %{model} успешно отредактирована.

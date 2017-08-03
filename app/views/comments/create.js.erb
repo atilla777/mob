@@ -1,1 +1,9 @@
-$('#comments').html("<%= j render(partial: 'comments') %>");
+<% if @comment.errors.present? %>
+  <% @comment.errors.full_messages.each do | message | %>
+    $('#new_comment_errors').html('<%= j message %>');
+  <% end %>
+<% else %>
+  $('#comments').html("<%= j render(partial: 'comments') %>");
+  $('#comment_body').val('');
+    $('#new_comment_errors').html('');
+<% end %>
