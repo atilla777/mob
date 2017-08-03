@@ -9,4 +9,12 @@ br
     = comment.user_name
   p
     = comment.body
+  - if user_signed_in?
+    = link_to t('views.action.edit'), '', class: 'edit_comment_link', data: { comment_id: comment.id }
+    div class = 'text-danger' id = "edit_comment_#{comment.id}_errors"
+    = form_for [@post, comment], remote: true do | f |
+      .form-group
+        = f.text_area :body, rows: 6, class: 'form-control'
+        br
+        = f.submit t('helpers.submit.save'), class: 'btn btn-success'
   hr

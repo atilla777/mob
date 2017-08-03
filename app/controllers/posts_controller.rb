@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   def show
     @post = set_post
     authorize! :show, Post, @post
-    @comments = @post.comments
+    @comments = @post.comments.order(created_at: :desc)
     @comment = Comment.new
   end
 

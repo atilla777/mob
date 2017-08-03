@@ -1,10 +1,9 @@
 <% if @comment.errors.present? %>
   <% @comment.errors.full_messages.each do | message | %>
-    $('#new_comment_errors').html('<%= j message %>');
+    $('#edit_comment_' + <%= @comment.id %> + '_errors').html('<%= j message %>');
   <% end %>
+  $('form#edit_comment_' + <%= @comment.id %> + ' #comment_body').val('<%= @stored_body %>');
 <% else %>
   $('#comments').html("<%= j render(partial: 'comments') %>");
-  $('form.new_comment #comment_body').val('');
-  $('#new_comment_errors').html('');
   hideEditComment();
 <% end %>
