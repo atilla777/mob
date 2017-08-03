@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
        @comment = Comment.new
     end
     @comments = @post.reload.comments.order(created_at: :desc)
+    @comments = @comments.page(params[:page])
   end
 
   def update
@@ -19,6 +20,7 @@ class CommentsController < ApplicationController
       @stored_body = Comment.find(params[:id]).body
     end
     @comments = @post.comments.order(created_at: :desc)
+    @comments = @comments.page(params[:page])
   end
 
   def destroy
@@ -26,6 +28,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
     @comments = @post.comments.order(created_at: :desc)
+    @comments = @comments.page(params[:page])
   end
 
   private

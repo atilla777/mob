@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     @post = set_post
     authorize! :show, Post, @post
     @comments = @post.comments.order(created_at: :desc)
+    @comments = @comments.page(params[:page])
     @comment = Comment.new
   end
 

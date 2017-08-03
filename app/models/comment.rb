@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  paginates_per 10
+
   validates :post_id, numericality: {only_integer: true}
   validates :user_id, numericality: { only_integer: true }
   validates :body, presence: true
