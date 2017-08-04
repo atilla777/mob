@@ -39,7 +39,7 @@ feature 'comment management' do
       find("a[href=\"#{post_comment_path(post_id: user_post.id, id: user_comment.id)}\"]").click
       page.accept_confirm
 
-      expect(page).to_not have_link(:css, "a[data-comment-id=\"#{user_comment.id}\"]")
+      expect(page).to_not have_link("a[data-comment-id=\"#{user_comment.id}\"]")
     end
   end
 
@@ -61,7 +61,7 @@ feature 'comment management' do
       user_comment
       visit "/posts/#{user_post.id}"
 
-      expect(page).to_not have_link(:css, "a[href=\"#{post_comment_path(post_id: user_post.id, id: user_comment.id)}\"]")
+      expect(page).to_not have_link("a[href=\"#{post_comment_path(post_id: user_post.id, id: user_comment.id)}\"]")
     end
   end
 end
