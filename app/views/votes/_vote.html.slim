@@ -1,0 +1,16 @@
+h4.text-info
+  = t('views.message.rating')
+= link_to post_votes_path(post_id: @post.id, vote: { score: 1 } ),
+  method: :post,
+  class: like_button_class(@rating),
+  remote: true do
+  i.glyphicon.glyphicon-thumbs-up
+  span.badge<
+    = @rating.likes_count
+=< link_to post_votes_path(post_id: @post.id, vote: { score: -1 } ),
+  method: :post,
+  class: dislike_button_class(@rating),
+  remote: true do
+  i.glyphicon.glyphicon-thumbs-down
+  span.badge<
+    = @rating.dislikes_count

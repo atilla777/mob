@@ -12,8 +12,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    authorize! :create, Post
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.merge(user_id: current_user.id))
+    authorize! :create, @post
     if @post.save
       redirect_to @post, nitice: 'Post was created'
     else
@@ -23,20 +23,21 @@ class PostsController < ApplicationController
 
   def show
     @post = set_post
-    authorize! :show, Post, @post
+    authorize! :show, Post
     @comments = @post.comments.order(created_at: :desc)
     @comments = @comments.page(params[:page])
     @comment = Comment.new
+    @rating = RatingPresenter.new(@post, current_user)
   end
 
   def edit
     @post = set_post
-    authorize! :edit, Post, @post
+    authorize! :show, @post
   end
 
   def update
     @post = set_post
-    authorize! :update, Post, @post
+    authorize! :show, @post
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was updated'
     else
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = set_post
-    authorize! :destroy, Post, @post
+    authorize! :show, @post
     @post.destroy
     redirect_to posts_path, notice: 'Post was destroyed'
   end

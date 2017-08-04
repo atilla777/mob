@@ -7,7 +7,9 @@ class ApplicationController < ActionController::Base
       respond_to do |format|
         if user_signed_in?
           format.html { redirect_back(fallback_location: root_path, notice: exception.message) }
+          format.js { head :forbidden }
         else
+          format.js { head :forbidden }
           format.html { redirect_to new_user_session_path, notice: exception.message }
         end
       end

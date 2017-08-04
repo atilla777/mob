@@ -54,6 +54,8 @@ ru:
       registration: Регистрация
     message:
       loggined_as: "Вы вошли как:"
+      rating: Рейтинг
+      vote_restrict: Нельзя проголосовать за свой пост
   date:
     abbr_day_names:
     - Вс
@@ -238,6 +240,8 @@ ru:
       forgot_password: "Забыли свой пароль?"
       did_not_recive_confirmation_instruction: "Не получили инструкцию по подтверждению?"
       did_not_receive_unlock_instruction: "Не получили инструкцию по разблокировке?"
+      like: Нравится
+      dislike: Не нравится
     select:
       prompt: 'Выберите: '
     submit:

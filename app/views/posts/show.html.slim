@@ -20,7 +20,9 @@ p
   =< link_to post_path(@post), data: { confirm: t('views.action.confirm') }, method: :delete do
     span.btn.btn-danger
       = t('views.action.delete', model: Post.model_name.human(count: 2))
-
+hr
+.post_rating
+  == render partial: 'votes/vote'
 hr
 #comments
   == render partial: 'comments/comments'

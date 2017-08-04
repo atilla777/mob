@@ -25,16 +25,22 @@ class Ability
     # For example, here the user can only update published articles.
     #
     #   can :update, Article, :published => true
-#    not_anonymouse = true if user.present?
+    not_anonymouse = true if user.present?
     alias_action :create, :read, :update, :destroy, to: :crud
     user ||= User.new
     if user.admin?
-      can :manage, :all
+      can :crud, :all
+      cannot :crud, Vote, post: { user_id: user.id } # admin can`t manage votes for his post
     elsif user.writer?
       can :crud, Post, user_id: user.id # writer can manage his posts
-      #can :create, Post # writer can manage his posts
-#    elsif not_anonymouse
-#      can :crud, Comment, user_id: user.id # users can make comments
+      can :crud, Comment, user_id: user.id # writer can manage his comments
+      can :crud, Vote, user_id: user.id # writer can manage his votes
+      cannot :crud, Vote, post: { user_id: user.id } # writer can`t manage votes for his post
+    elsif not_anonymouse
+      can :read, Post, user_id: user.id # user can read posts
+      can :crud, Comment, user_id: user.id # user can manage his comments
+      can :crud, Vote, user_id: user.id # user can manage his votes
+      cannot :crud, Vote, post: { user_id: user.id } #user can`t manage votes for his post
     else
       can :read, Post
     end

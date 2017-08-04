@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: [:create, :update, :destroy]
+    resources :votes, only: [:create]
   end
 
   #get '', to.'session' as: :login

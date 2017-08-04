@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
+    authorize! :create, @comment
     if @comment.save
        @comment = Comment.new
     end
@@ -15,6 +16,7 @@ class CommentsController < ApplicationController
   def update
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
+    authorize! :create, @comment
     if @comment.update(comment_params)
     else
       @stored_body = Comment.find(params[:id]).body
@@ -26,6 +28,7 @@ class CommentsController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
+    authorize! :create, @comment
     @comment.destroy
     @comments = @post.comments.order(created_at: :desc)
     @comments = @comments.page(params[:page])

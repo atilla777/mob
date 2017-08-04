@@ -14,12 +14,24 @@ admin.skip_confirmation_notification!
 admin.save
 admin.confirm
 
+admin = User.new(name: 'Writer',
+                    email: 'writer@host.io',
+                    admin: false,
+                    writer: true,
+                    password: 'password')
+admin.skip_confirmation_notification!
+admin.save
+admin.confirm
+
 Post.create(user_id: admin.id,
            name: 'Welcome to mob!',
            body: <<~TEXT
                   Welocome to Mob - My own blog!
-                  First - change password for Admin user!
+                  First - change password for Admin user:
                   default login - admin@host.io
+                  default password - password
+                  and Writer user:
+                  default login - writer@host.io
                   default password - password
            TEXT
            )

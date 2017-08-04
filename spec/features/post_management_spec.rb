@@ -10,8 +10,8 @@ feature 'posts management' do
   given(:writer_post) { Post.where(user_id: writer.id).first }
 
   feature 'by user' do
-    scenario 'he view posts' do
-      login_as(user, scope: :user)
+    scenario 'he view posts', js: true do
+      login_as user
       visit '/posts'
 
       expect(page).to have_content posts.first.body
@@ -19,7 +19,7 @@ feature 'posts management' do
     end
 
     scenario 'he view post' do
-      login_as(user, scope: :user)
+      login_as user
       visit "/posts/#{post.id}"
 
       expect(page).to have_content(post.body)
@@ -27,7 +27,7 @@ feature 'posts management' do
     end
 
     scenario 'he can`t edit post' do
-      login_as(user, scope: :user)
+      login_as user
       visit '/posts/'
 
       expect(page).to_not have_selector(:link_or_button, I18n.t('views.action.edit'))
@@ -38,7 +38,7 @@ feature 'posts management' do
     end
 
     scenario 'he can`t delete post' do
-      login_as(user, scope: :user)
+      login_as user
       page.driver.submit :delete, "/posts/#{post.id}", {}
 
       expect(page).to have_content(posts.last.body)
@@ -47,7 +47,7 @@ feature 'posts management' do
 
   feature 'by writer' do
     scenario 'he create post' do
-      login_as(writer, scope: :user)
+      login_as writer
       visit '/'
       click_on I18n.t('helpers.submit.create', model: Post.model_name.human)
       fill_in Post.human_attribute_name(:name), with: 'Post'
@@ -58,7 +58,7 @@ feature 'posts management' do
     end
 
     scenario 'he edit post' do
-      login_as(writer, scope: :user)
+      login_as writer
       visit "/posts/"
       find("a[href='/posts/#{post.id}/edit']").click
       fill_in Post.human_attribute_name(:name), with: 'I edited post!'
@@ -68,7 +68,7 @@ feature 'posts management' do
     end
 
     scenario 'he delete post', js: true do
-      login_as(writer, scope: :user)
+      login_as writer
       body = writer_post.body
       visit "/posts/"
       find("a[href='/posts/#{writer_post.id}']").click
