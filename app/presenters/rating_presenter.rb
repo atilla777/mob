@@ -34,4 +34,8 @@ class RatingPresenter
     Vote.where(post_id: @post.id, score: -1)
         .sum(:score) || 0
   end
+
+  def stars
+    @post.stars
+  end
 end

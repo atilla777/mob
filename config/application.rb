@@ -20,5 +20,7 @@ module Mob
       }
       config.i18n.default_locale = :ru
       config.time_zone = 'Moscow'
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
