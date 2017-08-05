@@ -6,9 +6,9 @@ class CalculateStarsJob < ApplicationJob
   def perform(*args)
     result = SQL_QUIERY.call
     result.each do | r |
-      post = Post.where(r.post_id).first
+      post = Post.where(id: r[:post_id]).first
       if post.present?
-         post.stars = r.stars
+         post.star = r[:stars]
          post.save
       end
     end

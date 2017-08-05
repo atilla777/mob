@@ -8,6 +8,7 @@ class VotesController < ApplicationController
     vote.score = vote_params[:score]
     vote.save
     @rating = RatingPresenter.new(@post, current_user)
+    CalculateStarsJob.perform_later
   end
 
   private
