@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     authorize! :index, Post
-    @posts = Post.all.page(params[:page])
+    @posts = Post.all.page(params[:page]).order(created_at: :desc)
   end
 
   def new

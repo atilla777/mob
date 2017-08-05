@@ -13,7 +13,7 @@ p
 = link_to posts_path do
   span.btn.btn-info
     = t('helpers.link_to.back', model: Post.model_name.human(count: 2))
-- if user_signed_in? && current_user.writer?
+- if can? :crud, @post
   =< link_to edit_post_path(@post) do
     span.btn.btn-warning
       = t('views.action.edit', model: Post.model_name.human(count: 2))
@@ -23,11 +23,12 @@ p
 hr
 .post_rating
   == render partial: 'votes/vote'
+
 hr
 #comments
   == render partial: 'comments/comments'
 
-- if user_signed_in?
+- if can? :crud, Comment
   #add_comment
     .text-danger#new_comment_errors
     = form_for [@post, @comment], remote: true do | f |
