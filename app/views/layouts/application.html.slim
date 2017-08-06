@@ -7,9 +7,8 @@ head
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'application', 'data-turbolinks-track' => true
 body
-
   nav.navbar.navbar-inverse
-    .container-fluid
+    .container
       .navbar-header
         a.navbar-brand
           | Mob
@@ -33,20 +32,16 @@ body
                 span.glyphicon.glyphicon-log-in
                 =< t('helpers.link_to.login')
 
-  .container
+  .container.theme-one
     - if notice.present?
       .row
-        .col-sm-8
-          p.notice.text-info
-            = notice
+        p.notice.text-info
+          = notice
     - if alert.present?
       .row
-        .col-sm-8
-          p.alert.text-danger
-            = alert
-    .row
-      .col-sm-8
-        = yield
+        p.alert.text-danger
+          = alert
+    = yield
 
   hr
   .footer.container-fluid
