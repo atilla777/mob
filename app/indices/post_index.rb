@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :post, :with => :real_time do
+ThinkingSphinx::Index.define :post, with: :real_time do
   scope { Post.includes(:comments) }
   # fields
   indexes name, sortable: true
