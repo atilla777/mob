@@ -94,6 +94,25 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
+  #  turn off sphinx indexing when testing
+  config.before :each do |example|
+    if example.metadata[:type] == :request
+      ThinkingSphinx::Test.init
+      ThinkingSphinx::Test.start index: false
+    end
+
+    configuration = ThinkingSphinx::Configuration.instance
+    configuration.settings['real_time_callbacks'] =
+      (example.metadata[:type] == :request)
+  end
+
+  config.after(:each) do |example|
+    if example.metadata[:type] == :request
+      ThinkingSphinx::Test.stop
+      ThinkingSphinx::Test.clear
+    end
+  end
+
   # truncation clean before all examples
   config.before(:suite) do
       DatabaseCleaner.strategy = :transaction

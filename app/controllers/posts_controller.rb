@@ -3,7 +3,15 @@ class PostsController < ApplicationController
 
   def index
     authorize! :index, Post
-    @posts = Post.all.page(params[:page]).order(created_at: :desc)
+    if params[:filter].present?
+      posts = Post.search(params[:filter])
+      @posts = Post.where(id: posts)
+    else
+      @posts = Post.all
+    end
+    @posts = @posts.includes(:user)
+                   .page(params[:page])
+                   .order(created_at: :desc)
   end
 
   def new
@@ -22,7 +30,10 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = set_post
+    @post = Post.where(id: params[:id])
+                .includes(:user)
+                .includes(:comments)
+                .first
     authorize! :show, Post
     @comments = @post.comments.order(created_at: :desc)
     @comments = @comments.page(params[:page])

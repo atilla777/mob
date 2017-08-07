@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   paginates_per 5
 
+  after_save ThinkingSphinx::RealTime.callback_for(:post)
+
   validates :name, presence: true
   validates :body, presence: true
   validates :user_id, presence: true
@@ -13,5 +15,9 @@ class Post < ApplicationRecord
 
   def show_created_at
     created_at.strftime("%d.%m.%Y %H:%M")
+  end
+
+  def comments_string
+    comments.pluck(:body).join(' ')
   end
 end

@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  after_save ThinkingSphinx::RealTime.callback_for(:post, [:post])
   paginates_per 10
 
   validates :post_id, numericality: {only_integer: true}
