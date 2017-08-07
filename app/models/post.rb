@@ -11,6 +11,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
 
+  #has_many :pictures
+
   delegate :name, to: :user, prefix: true
 
   def show_created_at

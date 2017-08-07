@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
 
+  resource :pictures, only: [:create, :destroy]
+
   resources :posts do
     resources :comments, only: [:create, :update, :destroy]
     resources :votes, only: [:create]

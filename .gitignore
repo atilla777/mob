@@ -25,3 +25,4 @@
 # credentials
 .env
 /config/development.sphinx.conf
+/public/uploads

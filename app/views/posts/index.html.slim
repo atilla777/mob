@@ -1,16 +1,15 @@
 h2.text-info
   = Post.model_name.human count: 2
   - if user_signed_in? && current_user.writer?
-    .pull-right
-      = link_to new_post_path
+    = link_to new_post_path
+      span.btn.btn-link
+        i.glyphicon.glyphicon-pencil
+        =< t('helpers.submit.create', model: Post.model_name.human)
+    - if user_signed_in? && current_user.admin?
+      = link_to set_stars_path, method: :post, remote: true
         span.btn.btn-link
-          i.glyphicon.glyphicon-pencil
-          =< t('helpers.submit.create', model: Post.model_name.human)
-      - if user_signed_in? && current_user.admin?
-        = link_to set_stars_path, method: :post, remote: true
-          span.btn.btn-link
-            i.glyphicon.glyphicon-star
-            =< t('helpers.link_to.set_stars')
+          i.glyphicon.glyphicon-star
+          =< t('helpers.link_to.set_stars')
 - @posts.each do | post |
   h3.text-primary
     = link_to post.name, post
@@ -29,13 +28,12 @@ h2.text-info
     span.glyphicon.glyphicon-comment
     =< post.comments.count
   p
-    = truncate((sanitize(post.body, tags: %w(strong em pre p br div ul ol li))), length: 200)
+    = post.body.html_safe
   h5
-  - if user_signed_in? && current_user.writer?
-    .pull-right
-      =< link_to edit_post_path(post) do
-        span.glyphicon.glyphicon-edit
-        =< t('views.action.edit')
+  - if user_signed_in? && can?(:crud, post)
+    =< link_to edit_post_path(post) do
+      span.glyphicon.glyphicon-edit
+      =< t('views.action.edit')
     br
   hr
 

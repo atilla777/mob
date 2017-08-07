@@ -1,26 +1,26 @@
-h4.text-primary
-  => Comment.model_name.human(count: 2)
-br
-- @comments.each do |comment|
-  h5.text-primary
-    span.glyphicon.glyphicon-time
-    =< comment.show_created_at
-    ' ,
-    span.glyphicon.glyphicon-user
-    =< comment.user_name
-  p
-    = comment.body
-  - if can? :crud, comment
-    = link_to t('views.action.edit'), '', class: 'edit_comment_link', data: { comment_id: comment.id }
-    =< link_to t('views.action.delete'), post_comment_path(id: comment.id, post_id: @post.id), method: :delete, remote: :true, data: {confirm: t('views.action.confirm')}
-    div class = 'text-danger' id = "edit_comment_#{comment.id}_errors"
-    = form_for [@post, comment], remote: true do | f |
-      = hidden_field_tag :page, params[:page]
-      .form-group
-        = f.text_area :body, rows: 6, class: 'form-control'
-        br
-        = f.submit t('helpers.submit.save'), class: 'btn btn-success'
-  hr
+- if @comments.present?
+  h4.text-primary
+    = Comment.model_name.human(count: 2)
+  - @comments.each do |comment|
+    h5.text-primary
+      span.glyphicon.glyphicon-time
+      =< comment.show_created_at
+      ' ,
+      span.glyphicon.glyphicon-user
+      =< comment.user_name
+    p
+      = comment.body
+    - if can? :crud, comment
+      = link_to t('views.action.edit'), '', class: 'edit_comment_link', data: { comment_id: comment.id }
+      =< link_to t('views.action.delete'), post_comment_path(id: comment.id, post_id: @post.id), method: :delete, remote: :true, data: {confirm: t('views.action.confirm')}
+      div class = 'text-danger' id = "edit_comment_#{comment.id}_errors"
+      = form_for [@post, comment], remote: true do | f |
+        = hidden_field_tag :page, params[:page]
+        .form-group
+          = f.text_area :body, rows: 6, class: 'form-control'
+          br
+          = f.submit t('helpers.submit.save'), class: 'btn btn-success'
+    hr
 
-span.pagination
-  = paginate @comments, params: { controller: "posts", action: "show", id: @post.id }
+  span.pagination
+    = paginate @comments, params: { controller: "posts", action: "show", id: @post.id }
