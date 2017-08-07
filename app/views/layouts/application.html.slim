@@ -16,6 +16,9 @@ body
         ul.nav.navbar-nav
           li
             = link_to Post.model_name.human(count: 2), posts_path
+          - if current_user.admin?
+            li
+              = link_to 'Sidekiq', sidekiq_web_path
         ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             li

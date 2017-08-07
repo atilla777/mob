@@ -4,8 +4,13 @@ h2.text-info
     .pull-right
       = link_to new_post_path
         span.btn.btn-link
-          i.glyphicon.glyphicon-plus
+          i.glyphicon.glyphicon-pencil
           =< t('helpers.submit.create', model: Post.model_name.human)
+      - if user_signed_in? && current_user.admin?
+        = link_to set_stars_path, method: :post, remote: true
+          span.btn.btn-link
+            i.glyphicon.glyphicon-star
+            =< t('helpers.link_to.set_stars')
 - @posts.each do | post |
   h3.text-primary
     = link_to post.name, post
@@ -20,13 +25,16 @@ h2.text-info
         i.glyphicon.glyphicon-star
       - else
         i.glyphicon.glyphicon-star-empty
+    ' ,
+    span.glyphicon.glyphicon-comment
+    =< post.comments.count
   p
     = simple_format (truncate post.body, length: 200)
   h5
   - if user_signed_in? && current_user.writer?
     .pull-right
       =< link_to edit_post_path(post) do
-        span.glyphicon.glyphicon-pencil
+        span.glyphicon.glyphicon-edit
         =< t('views.action.edit')
     br
   hr

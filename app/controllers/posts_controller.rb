@@ -52,6 +52,10 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: 'Post was destroyed'
   end
 
+  def set_stars
+    CalculateStarsJob.perform_later
+  end
+
   private
 
   def set_post

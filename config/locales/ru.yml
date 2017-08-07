@@ -242,6 +242,7 @@ ru:
       did_not_receive_unlock_instruction: "Не получили инструкцию по разблокировке?"
       like: Нравится
       dislike: Не нравится
+      set_stars: Пересчитать рейтинг
     select:
       prompt: 'Выберите: '
     submit:

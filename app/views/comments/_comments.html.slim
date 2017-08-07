@@ -1,12 +1,13 @@
 h4.text-primary
-  = Comment.model_name.human(count: 2)
+  => Comment.model_name.human(count: 2)
 br
 - @comments.each do |comment|
   h5.text-primary
     span.glyphicon.glyphicon-time
     =< comment.show_created_at
     ' ,
-    = comment.user_name
+    span.glyphicon.glyphicon-user
+    =< comment.user_name
   p
     = comment.body
   - if can? :crud, comment

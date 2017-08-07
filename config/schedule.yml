@@ -1,0 +1,4 @@
+calculate_stars_job:
+  cron: "*/10 * * * *"
+  class: "CalculateStarsJob"
+  queue: saving_stars

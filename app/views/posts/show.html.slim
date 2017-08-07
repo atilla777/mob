@@ -11,14 +11,14 @@ h5
 p
   = simple_format (truncate @post.body, length: 200)
 = link_to posts_path do
-  span.btn.btn-info
+  span.btn.btn-info.btn-xs
     = t('helpers.link_to.back', model: Post.model_name.human(count: 2))
 - if can? :crud, @post
   =< link_to edit_post_path(@post) do
-    span.btn.btn-warning
+    span.btn.btn-warning.btn-xs
       = t('views.action.edit', model: Post.model_name.human(count: 2))
   =< link_to post_path(@post), data: { confirm: t('views.action.confirm') }, method: :delete do
-    span.btn.btn-danger
+    span.btn.btn-danger.btn-xs
       = t('views.action.delete', model: Post.model_name.human(count: 2))
 hr
 .post_rating
@@ -37,4 +37,4 @@ hr
         br
         = f.text_area :body, rows: 6, class: 'form-control'
         br
-        = f.submit t('helpers.submit.save'), class: 'btn btn-success'
+        = f.submit t('helpers.submit.save'), class: 'btn btn-success btn-xs'
