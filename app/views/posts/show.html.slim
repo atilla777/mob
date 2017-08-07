@@ -9,7 +9,7 @@ h5
   ' ,
   => @post.user_name
 p
-  = simple_format (truncate @post.body, length: 200)
+  = sanitize @post.body, tags: %w(strong pre em p br div ul ol li)
 = link_to posts_path do
   span.btn.btn-info.btn-xs
     = t('helpers.link_to.back', model: Post.model_name.human(count: 2))

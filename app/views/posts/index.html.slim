@@ -29,7 +29,7 @@ h2.text-info
     span.glyphicon.glyphicon-comment
     =< post.comments.count
   p
-    = simple_format (truncate post.body, length: 200)
+    = truncate((sanitize(post.body, tags: %w(strong em pre p br div ul ol li))), length: 200)
   h5
   - if user_signed_in? && current_user.writer?
     .pull-right
