@@ -22,5 +22,7 @@ module Mob
       config.time_zone = 'Moscow'
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.action_mailer.deliver_later_queue_name = 'mailers'
   end
 end

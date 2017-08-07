@@ -1,7 +1,7 @@
 class CalculateStarsJob < ApplicationJob
   SQL_QUIERY = NtileQuery
 
-  queue_as :save_rating
+  queue_as :saving_stars
 
   def perform(*args)
     rating = SQL_QUIERY.call # [[post_id, score_sum, star], ...]
