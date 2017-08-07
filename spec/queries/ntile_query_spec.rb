@@ -20,7 +20,11 @@ RSpec.describe 'ntile query' do
     6.times do
       create(:vote, :like, post_id: one_dislike_six_like_post.id)
     end
-    ratings = NtileQuery.call
-    #expect(ratings.).to eq
+    rating = NtileQuery.call # [[post_id, score_sum, star], ...]
+    expect(rating).to include [one_dislike_post.id, -1, 1]
+    expect(rating).to include [one_like_post.id, 1, 2]
+    expect(rating).to include [two_like_post.id, 2, 3]
+    expect(rating).to include [three_like_post.id, 3, 4]
+    expect(rating).to include [one_dislike_six_like_post.id, 5, 5]
   end
 end

@@ -1,14 +1,14 @@
 class CalculateStarsJob < ApplicationJob
   SQL_QUIERY = NtileQuery
 
-  queue_as :default
+  queue_as :save_rating
 
   def perform(*args)
-    result = SQL_QUIERY.call
-    result.each do | r |
-      post = Post.where(id: r[:post_id]).first
+    rating = SQL_QUIERY.call # [[post_id, score_sum, star], ...]
+    rating.each do | r |
+      post = Post.where(id: r[0]).first
       if post.present?
-         post.star = r[:stars]
+         post.star = r[2]
          post.save
       end
     end
