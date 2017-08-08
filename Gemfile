@@ -71,7 +71,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.1', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-puma', require: false
+  gem 'capistrano3-puma', require: false
 end
 
 gem 'slim-rails'
