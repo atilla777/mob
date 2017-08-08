@@ -27,3 +27,4 @@
 /config/development.sphinx.conf
 /public/uploads
 /db/sphinx
+/public/assets
