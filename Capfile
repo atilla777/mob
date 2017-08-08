@@ -35,7 +35,7 @@ require "capistrano/rails/migrations"
 require "capistrano/puma"
 install_plugin Capistrano::Puma  # Default puma tasks
 install_plugin Capistrano::Puma::Nginx  # if you want to upload a nginx site template
-
+require 'capistrano/rails/collection'
 # require "capistrano/passenger"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
