@@ -11,7 +11,7 @@ What have been used in development process:
 * Slim
 * Bootstrap
 * Gvim with vundle plugins
-2) Testing and code linting:
+2) Testing (BDD and TDDD approaches was used) and code linting:
 * RSpec
 * Factory Girl
 * Capybara
