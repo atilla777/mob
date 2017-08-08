@@ -18,7 +18,9 @@ body
             = link_to Post.model_name.human(count: 2), posts_path
           - if user_signed_in? && current_user.admin?
             li
-              = link_to 'Sidekiq', sidekiq_web_path
+              = link_to t('helpers.link_to.admin'), rails_admin_path
+            li
+              = link_to t('helpers.link_to.sidekiq'), sidekiq_web_path
         = form_tag posts_path, method: :get, class: 'navbar-form navbar-right' do
           = hidden_field_tag :sort, params[:sort]
           .form-group.input-group

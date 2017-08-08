@@ -30,6 +30,8 @@ class Ability
     user ||= User.new
     if user.admin?
       can :crud, :all
+      can :access, :rails_admin
+      can :manage, :all
       cannot :crud, Vote, post: { user_id: user.id } # admin can`t manage votes for his post
     elsif user.writer?
       can :crud, Post, user_id: user.id # writer can manage his posts

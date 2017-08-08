@@ -243,6 +243,8 @@ ru:
       like: Нравится
       dislike: Не нравится
       set_stars: Пересчитать рейтинг
+      admin: Администрирование
+      sidekiq: Фоновые задачи
     select:
       prompt: 'Выберите: '
     submit:

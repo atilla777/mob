@@ -51,7 +51,9 @@ feature 'posts management' do
       visit '/'
       click_on I18n.t('helpers.submit.create', model: Post.model_name.human)
       fill_in Post.human_attribute_name(:name), with: 'Post'
-      fill_in Post.human_attribute_name(:body), with: 'Users post!'
+      Capybara.ignore_hidden_elements = false
+      fill_in("post_body_trix_input_post", with: 'Users post!')
+      Capybara.ignore_hidden_elements = true
       click_button I18n.t('helpers.submit.save')
 
       expect(page).to have_content 'Users post!'
