@@ -32,4 +32,4 @@ What have been used in development process:
 * Devise with omniauth-github
 * CanCanCan
 9) Deploy (in progres):
-Capistrano
+* Capistrano
