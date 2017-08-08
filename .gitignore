@@ -26,3 +26,4 @@
 .env
 /config/development.sphinx.conf
 /public/uploads
+/db/sphinx
