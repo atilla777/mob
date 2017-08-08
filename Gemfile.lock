@@ -87,6 +87,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-sidekiq (0.20.0)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -450,6 +453,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1)
   capistrano-rails-collection
   capistrano-rvm
+  capistrano-sidekiq
   capistrano3-puma
   capybara (~> 2.13)
   carrierwave
