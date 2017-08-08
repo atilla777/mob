@@ -258,6 +258,7 @@ ru:
       set_stars: Пересчитать рейтинг
       admin: Администрирование
       sidekiq: Фоновые задачи
+      more: читать далее
     select:
       prompt: 'Выберите: '
     submit:

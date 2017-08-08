@@ -28,7 +28,7 @@ h2.text-info
     span.glyphicon.glyphicon-comment
     =< post.comments.count
   p
-    = post.body.html_safe
+    = HTML_Truncator.truncate((post.body), 50, ellipsis: " ... #{link_to t('helpers.link_to.more'), post}").html_safe
   h5
   - if user_signed_in? && can?(:crud, post)
     =< link_to edit_post_path(post) do
