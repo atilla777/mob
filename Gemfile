@@ -67,6 +67,10 @@ group :development do
   gem 'reek', require: false
   gem 'rubocop', require: false
   gem 'brakeman', require: false
+  gem 'capistrano', '~> 3.6', require: false
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-bundler', require: false
 end
 
 gem 'slim-rails'
@@ -75,8 +79,8 @@ gem 'kaminari'
 gem 'dotenv-rails'
 gem 'devise'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'rails-jquery-autocomplete'
+#gem 'jquery-ui-rails'
+#gem 'rails-jquery-autocomplete'
 gem 'cancancan'
 gem 'sidekiq'
 gem 'sidekiq-cron'
