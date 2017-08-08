@@ -17,6 +17,13 @@ ru:
       comment:
         one: Комментарий
         other: Комментарии
+      vote:
+        one: Голос
+        other: Голоса
+      picture:
+        one: Изображение
+        other: Изображения
+      picture:
     attributes:
       user:
         name: Имя
@@ -32,6 +39,12 @@ ru:
         body: Комментарий
         user: Пользователь
         post: Пост
+      vote:
+        user_id: Пользователь
+        post_id: Пост
+        score: Нравится/не нравится
+      picture:
+        image: Файл изображения
   flashes:
     create: Запись %{model} успешно создана.
     update: Запись %{model} успешно отредактирована.
