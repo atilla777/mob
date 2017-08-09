@@ -2,6 +2,8 @@
 
 ### This project was created in one week (ok - one week and yet few days) to training and demonstrating technologies related with Ruby on Rails
 
+Demo site - http://ih632494.vds.myihor.ru/
+
 What have been used in development process:
 1) Main platform:
 * Ubuntu/Mint GNU Linux
