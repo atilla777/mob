@@ -31,7 +31,7 @@ PreCommit:
 #       - '**/Gemfile'
 #       - '**/Rakefile'
   RailsBestPractices:
-      enabled: true
+      enabled: false
 #     description: 'Checking Rails best practices'
   BundleAudit:
       enabled: true
@@ -53,7 +53,7 @@ PreCommit:
 
 PrePush:
   Brakeman:
-    enabled: true
+    enabled: false
 #   description: 'Check for security vulnerabilities'
 #   required_executable: 'brakeman'
 #   flags: ['--exit-on-warn', '--quiet', '--summary']
