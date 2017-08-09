@@ -1,8 +1,10 @@
 p
-  | Welcome
-  = @email
+  = t('views.message.welcome')
+  =< @email
   | !
 p
-  | You can confirm your account email through the link below:
+  = t('views.message.you_are_joining_to_mob')
 p
-  = link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+  = t('views.message.you_can_confirm_email')
+p
+  = link_to t('helpers.link_to.confirm_email'), confirmation_url(@resource, confirmation_token: @token)

@@ -66,6 +66,9 @@ ru:
       enter: "Вход"
       registration: Регистрация
     message:
+      welcome: "Добро пожаловать"
+      you_are_joining_to_mob: "Вы регистрируетесь в блоге 'Mob'."
+      you_can_confirm_email: "Вы можете подтвердить свой email кликнув по ссылке ниже:"
       loggined_as: "Вы вошли как:"
       rating: Рейтинг
       vote_restrict: Нельзя проголосовать за свой пост
@@ -244,6 +247,7 @@ ru:
     remember_me: Запомнить меня
   helpers:
     link_to:
+      confirm_email: Подтвердить email
       back: Вернуться к %{model}
       new: Новый %{model}
       login: Войти
