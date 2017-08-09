@@ -4,8 +4,11 @@ lock "3.9.0"
 set :application, "mob"
 set :repo_url, "git@github.com:atilla777/mob.git"
 
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
+set :puma_init_active_record, true
+#set :nginx_config_name, "#{fetch(:application)}_#{fetch(:stage)}"
+#set :nginx_ssl_certificate, "/etc/ssl/certs/#{fetch(:nginx_config_name)}.crt"
+#set :nginx_ssl_certificate_key, "/etc/ssl/private/#{fetch(:nginx_config_name)}.key"
+#set :nginx_use_ssl, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
