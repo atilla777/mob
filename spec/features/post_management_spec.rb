@@ -46,7 +46,7 @@ feature 'posts management' do
   end
 
   feature 'by writer' do
-    scenario 'he create post' do
+    scenario 'he create post', js: true do
       login_as writer
       visit '/'
       click_on I18n.t('helpers.submit.create', model: Post.model_name.human)
