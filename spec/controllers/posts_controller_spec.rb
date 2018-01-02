@@ -10,7 +10,7 @@ RSpec.describe PostsController, type: :controller do
   let(:update_post) { put :update, params: { id: writer_post.id, post: { name: 'Post updated!'}} }
   let(:delete_post) { delete :destroy, params: {id: writer_post.id } }
 
-  context 'anonymouse user' do
+  context 'anonymous user' do
     it 'can view posts' do
       get :index
 
